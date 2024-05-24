@@ -18,7 +18,7 @@ public class Main {
         fillingArrayTask11();
         multiplicationInArrayTask12();
         twoDimensionalArrayTask13();
-        creatingArrayTask14(5,10);
+        creatingArrayTask14(5, 10);
     }
 
     public static void printThreeWords() {
@@ -104,35 +104,39 @@ public class Main {
             System.out.println(reverseNumbers[i]);
         }
     }
+
     public static void fillingArrayTask11() {
         int[] arr = new int[100];
-        for (int i = 0; i < arr.length; i++){
-            arr[i] = i+1;
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = i + 1;
             System.out.println(arr[i]);
         }
     }
-    public static void multiplicationInArrayTask12(){
-        int[] arr = new int []{1, 5, 3, 2, 11, 4, 5, 2, 4, 8, 9, 1};
-        for (int i=0; i<arr.length; i++){
-            if(arr[i] < 6) {
+
+    public static void multiplicationInArrayTask12() {
+        int[] arr = new int[]{1, 5, 3, 2, 11, 4, 5, 2, 4, 8, 9, 1};
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] < 6) {
                 arr[i] = arr[i] * 2;
             }
             System.out.println(arr[i]);
         }
     }
+
     public static void twoDimensionalArrayTask13() {
         int[][] arr = new int[10][10];
         for (int i = 0; i < arr.length; i++) {
             arr[i][i] = 1;
-            arr[i][10-1-i] = 1;
+            arr[i][10 - 1 - i] = 1;
         }
-        for (int i = 0; i < 10; i++){
+        for (int i = 0; i < 10; i++) {
             System.out.println(Arrays.toString(arr[i]));
         }
     }
-    public static int[] creatingArrayTask14 (int len, int initialValue){
+
+    public static int[] creatingArrayTask14(int len, int initialValue) {
         int[] arr = new int[len];
-        for(int i = 0; i < arr.length; i++){
+        for (int i = 0; i < arr.length; i++) {
             arr[i] = initialValue;
             System.out.println(arr[i]);
         }
