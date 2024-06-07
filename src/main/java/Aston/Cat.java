@@ -2,12 +2,10 @@ package Aston;
 
 public class Cat extends Animals {
     boolean satiety = false;
-    int food;
-    int amountFoodDish;
-
-    public Cat(String name) {
-        super(name);
+    public Cat(String name, int food){
+        super(name,food);
     }
+    int quantityCats;
 
     @Override
     public void run(int distanceRun) {
@@ -23,12 +21,12 @@ public class Cat extends Animals {
         System.out.println("Кот " + name + " не умеет плавать");
     }
 
-    public void addendumFood(int amountFoodDish) {
-        if (amountFoodDish <= 0) {
+    public void addendumFood(int amount) {
+        if (amount <= 0) {
             System.out.println("Нельзя добавить нулевое или отрицательное количество еды");
         }
-        food += amountFoodDish;
-        System.out.println("Добавлено " + amountFoodDish + " еды в миску");
+        food += amount;
+        System.out.println("Добавлено " + amount + " еды в миску");
         System.out.println("В миске стало" + food + " еды");
         return;
     }
@@ -44,6 +42,10 @@ public class Cat extends Animals {
             System.out.println("Кот " + name + " съел " + amount + " еды" + satiety);
             food -= amount;
         }
+    }
+    public Cat (String name){
+        super(name);
+        quantityCats++;
     }
 }
 

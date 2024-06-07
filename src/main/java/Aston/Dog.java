@@ -1,9 +1,12 @@
 package Aston;
 
+import java.util.Stack;
+
 public class Dog extends Animals {
-    public Dog(String name) {
-        super(name);
+    public Dog(String name, int food) {
+        super(name, food);
     }
+    int quantityDogs;
 
     @Override
     public void run(int distanceRun) {
@@ -20,5 +23,9 @@ public class Dog extends Animals {
         } else {
             System.out.println("Собака" + name + " проплыла 10 метров и устала");
         }
+    }
+    public Dog (String name){
+        super(name);
+        quantityDogs++;
     }
 }
