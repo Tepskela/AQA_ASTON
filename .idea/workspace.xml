@@ -5,10 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a1b66351-c48a-4197-b7c2-ee973128910e" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/Aston/MyArrayDataException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Aston/MyArraySizeException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Aston/Animals.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Aston/Animals.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Aston/Cat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Aston/Cat.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Aston/Dog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Aston/Dog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Aston/Animals.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Aston/Cat.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Aston/Dog.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Aston/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Aston/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
