@@ -5,26 +5,17 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-        String[] arr = {"one", "two", "three", "four", "five", "six", "seven", "eight", "one", "two"};
+        System.out.println(factorial(4));
+    }
 
-        Map<String, Integer> numbering = new HashMap<>();
+    protected static int factorial(int n) {
+        if (n < 0) throw new IllegalArgumentException("Число не может быть отрицательным");
+        int factorial = 1;
 
-        //Задание 1.1
-        Set<String> unique = new LinkedHashSet<>(List.of(arr));
-        System.out.println(unique);
-
-
-        //Задание 1.2
-        for (String number : arr) {
-            numbering.put(number, numbering.getOrDefault(number, 0) + 1);
+        for (int i = 1; i <= n; i++) {
+            factorial = factorial * i;
         }
-        System.out.println(numbering);
+        if (factorial < 0) throw new ArithmeticException("Overflow occurred");
+        return factorial;
     }
 }
-
-
-
-
-
-
-
