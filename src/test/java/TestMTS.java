@@ -1,4 +1,7 @@
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.openqa.selenium.By;
@@ -8,6 +11,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.*;
+
+import java.util.LinkedList;
 import java.util.List;
 import java.time.Duration;
 import static org.testng.Assert.assertEquals;
@@ -24,54 +29,160 @@ public class TestMTS {
         WebElement button = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='cookie__buttons']/button[@id='cookie-agree']")));
         button.click();
     }
+    @Test
+    public void connection() {
+        WebElement selectElement = driver.findElement(By.xpath("//select[@id='pay']"));
+        WebElement selectElement2 = driver.findElement(By.xpath("//div[@class='select']/descendant::p[contains(text(),'Услуги связи')]"));
 
-    @Test(description = "Тест названия блока «Онлайн пополнение без комиссии»")
-    public void blockTitleTest() {
-        String expectedText = "Онлайн пополнение без комиссии";
-        String actualText = driver.findElement(By.xpath("//div[@class='pay__wrapper']/h2")).getText().replaceAll("\\n", " ");
-        assertEquals(expectedText, actualText, "Название блока неверное");
-    }
+        Actions builder = new Actions(driver);
+        builder
+                .click(selectElement)
+                .click(selectElement2)
+                .build()
+                .perform();
 
-    @Test(description = "Тест наличия логотипов платежных систем")
-    public void logosTest() {
-        List<WebElement> images = driver.findElements(By.xpath("//div[@class='pay__partners']/descendant::img"));
-
-        int expectedNumberOfLogos = 5;
-        assertEquals(expectedNumberOfLogos, images.size(), "Количество логотипов платёжных систем должно быть " + expectedNumberOfLogos);
-
-        for (WebElement image : images) {
-            String url = image.getAttribute("src");
-            assertTrue(url != null && !url.isEmpty(), "URL калоготипа не должен быть пустым");
-            double height = image.getSize().height;
-            double width = image.getSize().width;
-            assertTrue(height > 0, "Высота картинки " + url + " должна быть больше 0");
-            assertTrue(width > 0, "Ширина картинки " + url + " должна быть больше 0");
+        List<WebElement> elementsConnection = driver.findElements(By.xpath("//form[@id='pay-connection']/descendant::input"));
+        LinkedList<String> expectedText = new LinkedList<>();
+        expectedText.add(0, "Номер телефона");
+        expectedText.add(1, "Сумма");
+        expectedText.add(2, "E-mail для отправки чека");
+        LinkedList<String> actualText = new LinkedList<>();
+        for (WebElement element : elementsConnection) {
+            actualText.add(element.getAttribute("placeholder"));
         }
+        Assertions.assertTrue(actualText.equals(expectedText));
+        System.out.println("Порядок надписей соответствует порядку полей, значения надписей соответствуют");
     }
 
-    @Test(description = "Проверка ссылки «Подробнее о сервисе»")
-    public void linkTest() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-        WebElement link = wait.until(ExpectedConditions.elementToBeClickable(By.linkText("Подробнее о сервисе")));
-        String expectedUrl = link.getAttribute("href");
-        link.click();
+    @Test
+    public void internetConnection() {
+        WebElement selectElement = driver.findElement(By.xpath("//select[@id='pay']"));
+        WebElement selectElement2 = driver.findElement(By.xpath("//div[@class='select']/descendant::p[contains(text(),'Домашний интернет')]"));
 
-        wait.until(ExpectedConditions.urlContains(expectedUrl));
-        String actualUrl = driver.getCurrentUrl();
-        assertTrue(actualUrl.contains(expectedUrl), "Ссылка переводит на другую страницу");
+        Actions builder = new Actions(driver);
+        builder
+                .click(selectElement)
+                .click(selectElement2)
+                .build()
+                .perform();
 
-        driver.navigate().back();
+        List<WebElement> elementsInternet = driver.findElements(By.xpath("//form[@id='pay-internet']/descendant::input"));
+        LinkedList<String> expectedText = new LinkedList<>();
+        expectedText.add(0, "Номер абонента");
+        expectedText.add(1, "Сумма");
+        expectedText.add(2, "E-mail для отправки чека");
+        LinkedList<String> actualText = new LinkedList<>();
+        for (WebElement element : elementsInternet) {
+            actualText.add(element.getAttribute("placeholder"));
+        }
+        Assertions.assertTrue(actualText.equals(expectedText));
+        System.out.println("Порядок надписей соответствует порядку полей, значения надписей соответствуют");
     }
 
-    @Test(description = "Тест работы кнопки «Продолжить» ")
-    public void submitTest() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-        WebElement buttonSubmit = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//form[@id='pay-connection']")));
+    @Test
+    public void connectionTwo() {
+        WebElement selectElement = driver.findElement(By.xpath("//select[@id='pay']"));
+        WebElement selectElement2 = driver.findElement(By.xpath("//div[@class='select']/descendant::p[contains(text(),'Рассрочка')]"));
+
+        Actions builder = new Actions(driver);
+        builder
+                .click(selectElement)
+                .click(selectElement2)
+                .build()
+                .perform();
+
+        List<WebElement> elementsInstalment = driver.findElements(By.xpath("//form[@id='pay-instalment']/descendant::input"));
+        LinkedList<String> expectedText = new LinkedList<>();
+        expectedText.add(0, "Номер счета на 44");
+        expectedText.add(1, "Сумма");
+        expectedText.add(2, "E-mail для отправки чека");
+        LinkedList<String> actualText = new LinkedList<>();
+        for (WebElement element : elementsInstalment) {
+            actualText.add(element.getAttribute("placeholder"));
+        }
+        Assertions.assertTrue(actualText.equals(expectedText));
+    }
+
+    @Test
+    public void arrears() {
+        WebElement selectElement = driver.findElement(By.xpath("//select[@id='pay']"));
+        WebElement selectElement2 = driver.findElement(By.xpath("//div[@class='select']/descendant::p[contains(text(),'Задолженность')]"));
+
+        Actions builder = new Actions(driver);
+        builder
+                .click(selectElement)
+                .click(selectElement2)
+                .build()
+                .perform();
+
+        List<WebElement> elementsArrears = driver.findElements(By.xpath("//form[@id='pay-arrears']/descendant::input"));
+        LinkedList<String> expectedText = new LinkedList<>();
+        expectedText.add(0, "Номер счета на 2073");
+        expectedText.add(1, "Сумма");
+        expectedText.add(2, "E-mail для отправки чека");
+        LinkedList<String> actualText = new LinkedList<>();
+        for (WebElement element : elementsArrears) {
+            actualText.add(element.getAttribute("placeholder"));
+        }
+        Assertions.assertTrue(actualText.equals(expectedText));
+    }
+
+    @Test
+    public void Connection3() {
+        String sum = "1";
+        String phone = "297777777";
+        WebElement selectElement = driver.findElement(By.xpath("//select[@id='pay']"));
+        WebElement selectElement2 = driver.findElement(By.xpath("//div[@class='select']/descendant::p[contains(text(),'Услуги связи')]"));
+
+        Actions builder = new Actions(driver);
+        builder
+                .click(selectElement)
+                .click(selectElement2)
+                .build()
+                .perform();
+
+
         WebElement inputPhone = driver.findElement(By.xpath("//input[@id='connection-phone']"));
-        inputPhone.sendKeys("88005553535");
+        inputPhone.sendKeys(phone);
         WebElement inputSum = driver.findElement(By.xpath("//input[@id='connection-sum']"));
-        inputSum.sendKeys("200");
+        inputSum.sendKeys(sum);
+        WebElement buttonSubmit = driver.findElement(By.xpath("//form[@id='pay-connection']/button"));
         buttonSubmit.click();
+
+        List<WebElement> elementsSum = driver.findElements(By.xpath("//app-payment-container/descendant::*[contains(text(),'" + sum + "')]"));
+        for (WebElement elementSum : elementsSum) {
+            String digitText = elementSum.getAttribute("innerHTML").replaceAll("[^.\\d]", "");
+            Assertions.assertTrue(Double.parseDouble(digitText) == Double.parseDouble(sum));
+        }
+
+        WebElement elementPhone = driver.findElement(By.xpath("//app-payment-container/descendant::*[contains(text(),'" + phone + "')]"));
+        String phoneText = elementPhone.getAttribute("innerHTML").replaceAll("[^.\\d]", "");
+        Assertions.assertTrue(phoneText.equals("375" + phone));
+        System.out.println("Значение номера телефона совпадает с заданным: " + phoneText);
+
+        List<WebElement> elementsInput = driver.findElements(By.xpath("//app-payment-container/descendant::input/following-sibling::label"));
+        LinkedList<String> expectedText = new LinkedList<>();
+        expectedText.add(0, "Номер карты");
+        expectedText.add(1, "Срок действия");
+        expectedText.add(2, "CVC");
+        expectedText.add(3, "Имя держателя (как на карте)");
+        LinkedList<String> actualText = new LinkedList<>();
+        for (WebElement element : elementsInput) {
+            actualText.add(element.getAttribute("innerHTML"));
+        }
+        Assertions.assertTrue(actualText.equals(expectedText));
+
+        List<WebElement> images = driver.findElements(By.xpath("//app-payment-container/descendant::input[@id='cc-number']/parent::*/following::img"));
+        for (int i = 0; i < images.size(); i++) {
+            String url = images.get(i).getAttribute("src");
+            Assertions.assertTrue(url != null,"URL картинок пусты");
+            double height = images.get(i).getSize().height;
+            double width = images.get(i).getSize().width;
+            Assertions.assertTrue(height > 0);
+            System.out.println("Высота картинки " + url + " равна " + height);
+            Assertions.assertTrue(width > 0);
+            System.out.println("Ширина картинки " + url + " равна " + width);
+        }
     }
 
     @AfterClass
