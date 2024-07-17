@@ -51,7 +51,7 @@ public class TestMTS {
             actualText.add(element.getAttribute("placeholder"));
         }
         Assertions.assertTrue(actualText.equals(expectedText));
-        System.out.println("Порядок надписей соответствует порядку полей, значения надписей соответствуют");
+        System.out.println("Надписи соответствуют полям");
     }
 
     @Test
@@ -76,7 +76,7 @@ public class TestMTS {
             actualText.add(element.getAttribute("placeholder"));
         }
         Assertions.assertTrue(actualText.equals(expectedText));
-        System.out.println("Порядок надписей соответствует порядку полей, значения надписей соответствуют");
+        System.out.println("Надписи соответствуют полям");
     }
 
     @Test
